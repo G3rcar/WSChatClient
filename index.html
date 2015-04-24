@@ -3,8 +3,21 @@
     <head>
         <meta charset="utf-8">
         <title>Chat RPL0</title>
+
+        <link rel="manifest" href="manifest.json">
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <link rel="icon" sizes="192x192" href="res/img/launcher-icon-4x.png">
+        <link rel="icon" sizes="128x128" href="res/img/launcher-icon-3x.png">
+        <link rel="apple-touch-icon" sizes="128x128" href="res/img/launcher-icon-3x.png">
+        <link rel="apple-touch-icon-precomposed" sizes="128x128" href="res/img/launcher-icon-3x.png">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <link rel="stylesheet" type="text/css" href="res/css/bootstrap.min.css">
  
         <style>
+        /*
         * { font-family:tahoma; font-size:12px; padding:0px; margin:0px; }
         p { line-height:18px; }
         div { width:500px; margin-left:auto; margin-right:auto;}
@@ -13,16 +26,64 @@
         #input { border-radius:2px; border:1px solid #ccc;
                  margin-top:10px; padding:5px; width:400px;  }
         #status { width:88px; display:block; float:left; margin-top:15px; }
+        */
+       
+        .controlls div{
+            padding-left: 0px; 
+            padding-right: 0px; 
+        }
+        .well{
+            margin-top: 2px;
+            margin-bottom: 2px;
+            overflow: auto;
+        }
+        label{
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
         </style>
     </head>
     <body>
-        <div id="content"></div>
-        <div>
-            <span id="status">Conectando...</span>
-            <input type="text" id="input" disabled="disabled" />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3 well">
+                    <div id="content"></div>
+                </div>
+            </div>
+            <div class="row main-controlls">
+                <div class="col-sm-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3 ">
+                    <div class="row controlls">
+                        <div class="col-xs-12">
+                            <label for="input" id="status"> Conectando... </label>
+                            <input type="text" id="input" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
         </div>
  
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="./chat-frontend.js"></script>
     </body>
+    <script src="res/js/jquery-1.9.1.min.js"></script>
+    <script src="res/js/jquery.scrollTo.min.js"></script>
+    <script src="res/js/bootstrap.min.js"></script>
+    <script src="res/js/chat-frontend.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            resize();
+        });
+
+        $(window).resize(function(){
+            resize();
+        })
+
+        function resize(){
+            var winHeight = $(window).height();
+            var fieldHeight = $(".row.main-controlls").height() + 6 + 19 + 19;
+
+            $("#content").height(winHeight-fieldHeight);
+        }
+    </script>
 </html>
